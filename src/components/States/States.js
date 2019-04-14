@@ -12,7 +12,7 @@ export default class States extends React.Component {
                 this.setState(draft);
                 console.log('GET draft', draft);
                 // выпилить костыль, когда можно будет создавать пациентов
-            }, (error) => {
+            }, (error) => { //eslint-disable-line
                 const tempData = {
                     'name': 'wtf is this',
                     'description': '????'

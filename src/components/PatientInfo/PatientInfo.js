@@ -1,20 +1,19 @@
-import {Component} from "react";
 import './PatientInfo.css';
-import React from "react";
-import NewStatusForm from "../NewStatusForm/NewStatusForm";
-import {getPatientById} from "../../Services/patientService";
-export default class PatientInfo extends Component {
+import React from 'react';
+import NewStatusForm from '../NewStatusForm/NewStatusForm';
+import { getPatientById } from '../../Services/patientService';
 
+export default class PatientInfo extends React.Component {
     state = {};
 
-    componentDidMount(){
-        getPatientById(1).then(res =>{ //TODO: get from props
+    componentDidMount () {
+        getPatientById(1).then(res => { // TODO: get from props
             this.setState(res);
             console.log(res);
         });
     }
-    render() {
-        const {name, age} = this.state;
+    render () {
+        const { name, age } = this.state;
         return (
             <aside className="PatientInfo">
                 <section className="PatientInfo-Name">
