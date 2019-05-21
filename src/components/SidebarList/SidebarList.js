@@ -71,7 +71,7 @@ export default class SidebarList extends React.Component {
                     width='wide'
                 >
                     <h2>Patients</h2>
-                    {patients.map(patient => {
+                    {patients.map((patient, index) => {
                         return (
                             <Menu.Item as='div'
                                 key={patient.name}

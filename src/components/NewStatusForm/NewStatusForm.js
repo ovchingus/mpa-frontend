@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Button, Select, Input } from 'semantic-ui-react';
+import { Form, Button, Input } from 'semantic-ui-react';
 import './NewStatusForm.css';
+import AssociationForm from '../AssoсiationForm/AssociationForm';
 
 export default class NewStatusForm extends React.Component {
     state = {
@@ -23,6 +24,12 @@ export default class NewStatusForm extends React.Component {
         // ...this.state,
         result: event.target.value
     });
+
+    getAssociationData = () => {
+        const hm = this.props.diseaseData.find(data => data.name === this.state.healthMatter);
+
+        return `eq($status.${hm.id}, ${this.state.result})`;
+    }
 
     render () {
         const { className, diseaseData } = this.props;
@@ -56,7 +63,8 @@ export default class NewStatusForm extends React.Component {
                                 onChange={this.onResultChange}
                             />
                         </Form.Field>
-                        <Button type='submit' basic color='green'>Submit</Button>
+                        <Button type='submit' basic color='green' >Submit</Button>
+                        {healthMatter && result && <AssociationForm style={{ position: 'relative' }} getData={this.getAssociationData} />}
                     </Form.Group>
                 </Form>}
             </section>

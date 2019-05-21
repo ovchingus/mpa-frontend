@@ -1,7 +1,8 @@
 import React from 'react';
+import { Button, Divider, Icon } from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
 import './StatusDraft.css';
-import { Button, Divider, Icon } from 'semantic-ui-react';
+import AssociationForm from '../AssoсiationForm/AssociationForm';
 import { commitDraft, createDraft, getDiseaseData, getDraft, getNextStates } from '../../Services/draftService';
 
 export default class StatusDraft extends React.Component {
@@ -51,7 +52,7 @@ export default class StatusDraft extends React.Component {
         const { patientId, onNextStates, state } = this.props;
         let { draftData } = this.state;
         console.log('GET DRAFT', this.state);
-        if(attribute) {
+        if (attribute) {
             draftData.attributes = {
                 ...draftData.attributes,
                 ...attribute
@@ -81,6 +82,7 @@ export default class StatusDraft extends React.Component {
 
         return (
             <div className='States-Draft Draft'>
+                <AssociationForm />
                 <h2 className='States-Heading'>State Draft</h2>
                 <p>
                     last updated: {status.submittedOn}
