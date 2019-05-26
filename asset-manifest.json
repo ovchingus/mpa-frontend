@@ -1,15 +1,15 @@
 {
-  "main.css": "/static/css/main.a52462e2.chunk.css",
-  "main.js": "/static/js/main.5b2d5ed7.chunk.js",
-  "main.js.map": "/static/js/main.5b2d5ed7.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-  "static/css/2.d5630e2c.chunk.css": "/static/css/2.d5630e2c.chunk.css",
-  "static/js/2.d761f426.chunk.js": "/static/js/2.d761f426.chunk.js",
-  "static/js/2.d761f426.chunk.js.map": "/static/js/2.d761f426.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.28d4e787bff8f8dcb43c27f815c4068f.js": "/precache-manifest.28d4e787bff8f8dcb43c27f815c4068f.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/2.d5630e2c.chunk.css.map": "/static/css/2.d5630e2c.chunk.css.map",
-  "static/css/main.a52462e2.chunk.css.map": "/static/css/main.a52462e2.chunk.css.map"
+  "main.css": "/mpa-frontend/static/css/main.a52462e2.chunk.css",
+  "main.js": "/mpa-frontend/static/js/main.5b2d5ed7.chunk.js",
+  "main.js.map": "/mpa-frontend/static/js/main.5b2d5ed7.chunk.js.map",
+  "runtime~main.js": "/mpa-frontend/static/js/runtime~main.6e80f18b.js",
+  "runtime~main.js.map": "/mpa-frontend/static/js/runtime~main.6e80f18b.js.map",
+  "static/css/2.d5630e2c.chunk.css": "/mpa-frontend/static/css/2.d5630e2c.chunk.css",
+  "static/js/2.d761f426.chunk.js": "/mpa-frontend/static/js/2.d761f426.chunk.js",
+  "static/js/2.d761f426.chunk.js.map": "/mpa-frontend/static/js/2.d761f426.chunk.js.map",
+  "index.html": "/mpa-frontend/index.html",
+  "precache-manifest.12b34e81b547e5608c58dfa6e1af1213.js": "/mpa-frontend/precache-manifest.12b34e81b547e5608c58dfa6e1af1213.js",
+  "service-worker.js": "/mpa-frontend/service-worker.js",
+  "static/css/2.d5630e2c.chunk.css.map": "/mpa-frontend/static/css/2.d5630e2c.chunk.css.map",
+  "static/css/main.a52462e2.chunk.css.map": "/mpa-frontend/static/css/main.a52462e2.chunk.css.map"
 }
