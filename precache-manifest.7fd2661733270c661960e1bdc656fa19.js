@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/mpa-frontend/static/js/runtime~main.6e80f18b.js"
   },
   {
-    "revision": "1d564999b77ba8a96eaa",
-    "url": "/mpa-frontend/static/js/main.5b2d5ed7.chunk.js"
+    "revision": "84fde2f3b0a10dd7d8fe",
+    "url": "/mpa-frontend/static/js/main.05140950.chunk.js"
   },
   {
     "revision": "58e69dcc098b6cc6e53d",
     "url": "/mpa-frontend/static/js/2.d761f426.chunk.js"
   },
   {
-    "revision": "1d564999b77ba8a96eaa",
+    "revision": "84fde2f3b0a10dd7d8fe",
     "url": "/mpa-frontend/static/css/main.a52462e2.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/mpa-frontend/static/css/2.d5630e2c.chunk.css"
   },
   {
-    "revision": "7750dd398b1036307d73ea46fbe07886",
+    "revision": "a58a78c691b4f4e07d88272fbbc6bb66",
     "url": "/mpa-frontend/index.html"
   }
 ];
