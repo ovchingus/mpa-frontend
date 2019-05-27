@@ -17,30 +17,23 @@ export class StatusDraft extends React.Component {
     };
 
     async componentDidMount () {
-        const { patientId } = this.props;
+        const { patient } = this.props.patient;
+        const patientId = patient && patient.id;
         if (patientId) {
-            await this.props.getDraft(patientId);
-
-            console.log('DRAFT', this.props.draft);
-
-            await this.props.getDisease(patientId);
-
-            console.log('GET diseaseData', this.props.disease);
-
-            await this.props.getNextStates(patientId);
+            await this.props.updatePatientStatusData(patientId);
         }
     }
-
     async componentWillReceiveProps (nextProps) {
-        const { patientId } = nextProps;
+        const { patient } = this.props;
+        const patientId = patient && patient.id;
 
-        if (patientId === this.props.patientId) {
+        if (patientId === this.props.patient.id) {
             return;
         }
 
         await this.props.getNextStates(patientId);
 
-        const diseaseId = this.props.diseases.find(disease => disease.name === this.props.patient.diseaseName).id;
+        const diseaseId = this.props.diseases.find(disease => disease.name === patient.diseaseName).id;
 
         await this.props.getMedicines(diseaseId);
     }
@@ -50,7 +43,7 @@ export class StatusDraft extends React.Component {
             predicate: `eq(\${draftId}, ${this.props.draft.id})`,
             type: 'draft'
         };
-    }
+    };
 
     onPlusClick = (name) => () => {
         switch (name) {
@@ -70,16 +63,17 @@ export class StatusDraft extends React.Component {
     };
 
     onDraftSubmit = async () => {
-        const { patientId } = this.props;
+        const { id } = this.props.patient;
         await this.onDraftUpdate();
-        await this.props.commitDraft(patientId);
         alert('saved!');
+        await this.props.commitDraft(id);
+        await this.props.updatePatientStatusData(id);
     };
 
     onDraftUpdate = async (attribute, medicineId) => {
-        const { patientId, draft, status, medicines } = this.props;
+        const { patient, draft, medicines } = this.props;
+        const status = patient.status;
         const state = draft.state || status.state;
-        console.log('debug', this.props);
         if (draft && draft.attributes && attribute) {
             let updated = false;
             draft.attributes.map((attr) => {
@@ -105,12 +99,13 @@ export class StatusDraft extends React.Component {
             stateId: (state && state.id) || draft.stateId
         };
 
-        await this.props.createDraft(patientId, data);
-        await this.props.getNextStates(patientId);
+        await this.props.createDraft(patient.id, data);
+        await this.props.getNextStates(patient.id);
     };
 
     render () {
-        const { status, patientId, draft, disease, medicines } = this.props;
+        const { patient, draft, disease, medicines } = this.props;
+        const status = (patient && patient.status) || {};
         const currentState = draft.state || status.state;
         let attributes = draft.attributes || [];
         let currentMedicines = draft.medicines || [];
@@ -120,16 +115,15 @@ export class StatusDraft extends React.Component {
             return !attributes.some(attribute => attribute.id === diseaseItem.id);
         });
         console.log('STORE', store.getState());
-        console.log('state', this.props);
 
         return (
             <div className='States-Draft Draft'>
-                <AssociationForm getData={this.getAssociationData} />
+                <AssociationForm getData={this.getAssociationData}/>
                 <h2 className='States-Heading'>Черновик состояния</h2>
                 <p>
                     last updated: {status.submittedOn}
                 </p>
-                { currentState && <div>
+                {currentState && <div>
                     <p>Текущее состояние</p>
                     <p>state name: {currentState.name}</p>
                     <p>
@@ -144,11 +138,12 @@ export class StatusDraft extends React.Component {
                 {attributes && attributes.map(attribute => (
                     <NewStatusForm
                         key={attribute.id}
-                        patientId={patientId}
+                        patientId={patient.id}
                         statusId={status.id}
                         onDraftUpdate={this.onDraftUpdate}
                         diseaseData={[attribute]}
                         attribute={attribute}
+                        // disabled
                     />
                 ))}
                 {diseaseData && new Array(symptomsAmount).fill(true).map((el, index) =>
@@ -164,7 +159,7 @@ export class StatusDraft extends React.Component {
                         }
                         <NewStatusForm
                             className={index < symptomsAmount - 1 ? 'Draft-StatusForm--Margined' : ''}
-                            patientId={patientId}
+                            patientId={patient.id}
                             statusId={status.id}
                             onDraftUpdate={this.onDraftUpdate}
                             diseaseData={diseaseData}
@@ -195,7 +190,7 @@ export class StatusDraft extends React.Component {
                     </div>
                 )}
                 <br/>
-                <Button type="submit" fluid positive onClick={this.onDraftSubmit}>Save draft</Button>
+                <Button type="submit" fluid positive onClick={this.onDraftSubmit}>Сохранить черновик</Button>
             </div>
         );
     }
