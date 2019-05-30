@@ -11,6 +11,8 @@ import * as diseaseThunks from '../../redux/thunks/disease';
 import * as nextStatesThunks from '../../redux/thunks/nextStates';
 import * as medicinesThunks from '../../redux/thunks/medicines';
 import * as patientThunks from '../../redux/thunks/patient';
+import * as graphThunks from '../../redux/thunks/graph';
+import Graph from '../Graph/Graph';
 
 export class States extends React.Component {
     componentDidMount () {
@@ -51,6 +53,7 @@ export class States extends React.Component {
         const diseaseId = this.props.diseases.find(disease => disease.name === this.props.diseaseName).id;
 
         await this.props.getMedicines(diseaseId);
+        await this.props.getGraph(diseaseId);
 
         console.log('DRAFT', this.props.draft);
         console.log('GET diseaseData', this.props.disease);
@@ -90,7 +93,8 @@ export class States extends React.Component {
                     </div>
                     <div className="States-DraftWrap States-Wrap">
                         <StatusDraft updatePatientStatusData={this.updatePatientStatusData}/>
-                        <Associations />
+                        {/*<Associations />*/}
+                        <Graph />
                     </div>
                     {nextStates.length ? <div className="States-NextWrap States-Wrap">
                         <div className="States-Next">
@@ -124,6 +128,7 @@ export default connect(
         getDisease: diseaseThunks.get,
         getNextStates: nextStatesThunks.get,
         getPatient: patientThunks.get,
-        getMedicines: medicinesThunks.get
+        getMedicines: medicinesThunks.get,
+        getGraph: graphThunks.get
     }
 )(States);
