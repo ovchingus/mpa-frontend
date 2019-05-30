@@ -31,3 +31,7 @@ export function getHistory (id) {
 export function getNextStates (id) {
     return get(`/patients/${id}/status/draft/states`);
 }
+
+export const getGraph = (diseaseId) => {
+    return get(`/diseases/${diseaseId}/states`);
+};

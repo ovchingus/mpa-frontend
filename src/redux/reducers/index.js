@@ -8,6 +8,7 @@ import disease from './disease';
 import diseases from './diseases';
 import history from './history';
 import medicines from './medicines';
+import graph from './graph';
 
 export default combineReducers({
     associations,
@@ -18,5 +19,6 @@ export default combineReducers({
     disease,
     diseases,
     history,
-    medicines
+    medicines,
+    graph
 });
