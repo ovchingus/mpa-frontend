@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Divider, Icon, Select } from 'semantic-ui-react';
+import { Button, Divider, Icon, Loader, Select } from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
 import './StatusDraft.css';
 import AssociationForm from '../AssociationForm/AssociationForm';
@@ -9,38 +9,39 @@ import * as nextStatesThunks from '../../redux/thunks/nextStates';
 import * as diseaseThunks from '../../redux/thunks/disease';
 import store from '../../redux';
 
-export class StatusDraft extends React.Component {
+export class StatusDraftContainer extends React.Component {
     state = {
         symptomsAmount: 1,
         medicinesAmount: 1,
         disableSubmit: false
     };
 
-    async componentDidMount () {
-        const { patient } = this.props.patient;
-        const patientId = patient && patient.id;
-        if (patientId) {
-            await this.props.updatePatientStatusData(patientId);
-        }
+    componentDidMount () {
+        const { patient } = this.props;
+        console.log('componentDidMount', this.props, store.getState());
+
+        this.props.updatePatientStatusData(patient.id);
     }
 
-    componentWillReceiveProps ({patient, draft}) {
-      if (patient && patient.id && patient.id === this.props.patient.id) {
-        return;
-      }
+    componentWillReceiveProps (nextProps) {
+        console.log('componentWillReceiveProps', this.props, nextProps, store.getState());
+        const { patient, draft } = nextProps;
+        if (patient && patient.id && patient.id === this.props.patient.id) {
+            return;
+        }
 
-      this.setState({
-        symptomsAmount: 1,
-        medicinesAmount: draft.medicines && draft.medicines.length > 0 ? draft.medicines.length : 1
-      })
+        this.setState({
+            symptomsAmount: 1,
+            medicinesAmount: draft.medicines && draft.medicines.length > 0 ? draft.medicines.length : 1
+        });
     }
 
   getAssociationData = () => {
-        return {
-            predicate: `eq({status.state.id}, ${this.props.draft.state.id})`,
-            type: 'state'
-        };
-    };
+      return {
+          predicate: `eq({status.state.id}, ${this.props.draft.state.id})`,
+          type: 'state'
+      };
+  };
 
     onPlusClick = (name) => () => {
         switch (name) {
@@ -124,19 +125,20 @@ export class StatusDraft extends React.Component {
                 <p>
                     last updated: {status.submittedOn}
                 </p>
-                {currentState && <div>
-                    <p>Текущее состояние</p>
-                    <p>state name: {currentState.name}</p>
-                    <p>
-                        description:{currentState.description}
-                    </p>
-                    {currentMedicines.length !== 0 && <h3>Лекарства</h3>}
-                    {currentMedicines && currentMedicines.map(medicineId =>
-                      <p key={medicineId}>
-                        {medicines.find(medicine => medicine.id === medicineId).name}
-                      </p>
-                    )}
-                </div>
+                {currentState &&
+                 <div>
+                     <p>Текущее состояние</p>
+                     <p>state name: {currentState.name}</p>
+                     <p>
+                          description:{currentState.description}
+                     </p>
+                     {currentMedicines.length !== 0 && <h3>Лекарства</h3>}
+                     {currentMedicines && currentMedicines.map(medicineId =>
+                         <p key={medicineId}>
+                             {medicines.find(medicine => medicine.id === medicineId).name}
+                         </p>)
+                     }
+                 </div>
                 }
                 <Divider fitted/>
                 {attributes && attributes.map(attribute => (
@@ -207,7 +209,7 @@ export class StatusDraft extends React.Component {
     }
 }
 
-export default connect(
+export const StatusDraft = connect(
     store => ({
         draft: store.draft,
         disease: store.disease,
@@ -222,4 +224,4 @@ export default connect(
         getNextStates: nextStatesThunks.get,
         getDisease: diseaseThunks.get
     }
-)(StatusDraft);
+)(StatusDraftContainer);

@@ -1,27 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './PatientInfo.css';
 import AssociationForm from '../AssociationForm/AssociationForm';
 import * as historyThunks from '../../redux/thunks/history';
+import { Loader } from 'semantic-ui-react';
+import './PatientInfo.css';
 
-export class PatientInfo extends React.Component {
-    state = {
-        history: []
-    };
-
-    componentWillReceiveProps (nextProps) {
-        const { patient } = nextProps;
-
-        if (patient && this.props.patient && patient.id === this.props.patient.id) {
-            return;
-        }
-
-        this.props.getHistory(patient.id);
+class PatientInfoContainer extends React.Component {
+    componentDidMount () {
+        const { patient, getHistory } = this.props;
+        getHistory(patient.id);
     }
 
     render () {
         const { name, birthDate } = this.props.patient;
-        const { history = [] } = this.props;
+        const { history } = this.props;
 
         const dateObj = new Date(birthDate);
         const year = dateObj.getFullYear();
@@ -47,12 +39,12 @@ export class PatientInfo extends React.Component {
                 </section>
                 <section className="PatientInfo-History">
                     <h3>History</h3>
-                    {history.map(event =>
+                    {history ? history.map(event =>
                         <div key={event.id}>
                             <p>date:{event.submittedOn}</p>
                             <p>name:{event.state.name}</p>
                             <br/>
-                        </div>)
+                        </div>) : <Loader/>
                     }
                 </section>
             </aside>
@@ -60,7 +52,7 @@ export class PatientInfo extends React.Component {
     }
 }
 
-export default connect(
+export const PatientInfo = connect(
     store => ({
         patient: store.patient,
         history: store.history
@@ -68,4 +60,4 @@ export default connect(
     {
         getHistory: historyThunks.get
     }
-)(PatientInfo);
+)(PatientInfoContainer);
