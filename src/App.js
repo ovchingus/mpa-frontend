@@ -1,30 +1,20 @@
 import React from 'react';
+import { PatientsList } from './components/PatientsList/PatientsList';
+import { Route, Switch } from 'react-router-dom';
+import { Header } from './components/Header/Header';
+import { headerRoutes } from './constants';
 import './App.css';
-import { Menu, Ref, Sidebar, Segment } from 'semantic-ui-react';
-import PatientInfo from './components/PatientInfo/PatientInfo';
-import States from './components/States/States';
-import SidebarList from './components/SidebarList/SidebarList';
 
-export default class App extends React.Component {
-  state = {
-      burgerRef: null
-  };
+export const App = () => (
+    <div className="App">
+        <Header/>
+        <main className={'Main'}>
+            <Switch>
+                <Route exact path='/' component={PatientsList}/>
+                {headerRoutes.map(route =>
+                    <Route path={route.path} component={route.component} key={route.path}/>)}
+            </Switch>
+        </main>
+    </div>
 
-  render () {
-      return (
-          <Sidebar.Pushable as={Segment}>
-              <SidebarList trigger={this.state.burgerRef} />
-              <Sidebar.Pusher className="App">
-                  <Menu attached="top">
-                      <Ref innerRef={burger => this.setState({ burgerRef: burger })}>
-                          <Menu.Item icon="bars" />
-                      </Ref>
-                  </Menu>
-                  <PatientInfo />
-                  {/* принимаем на веру то, что бек создаёт статус при создании пациента */}
-                  <States />
-              </Sidebar.Pusher>
-          </Sidebar.Pushable>
-      );
-  }
-}
+);

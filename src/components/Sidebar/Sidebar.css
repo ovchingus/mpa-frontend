@@ -1,0 +1,14 @@
+.Sidebar{
+    margin-right: 20px;
+}
+
+.Sidebar .ui.vertical.menu .Sidebar-Link_active .item {
+    background: rgba(0, 0, 0, .05);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.Sidebar .ui.vertical.menu .Sidebar-Link_active .item:after {
+   visibility: visible;
+    background-color: #f2f2f2;
+}

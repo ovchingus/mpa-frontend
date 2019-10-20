@@ -1,4 +1,4 @@
-import * as actionCreaters from '../reducers/patient';
+import * as actionCreators from '../reducers/patient';
 import * as service from '../../Services/patientService';
 
 export const get = (id) => {
@@ -7,7 +7,7 @@ export const get = (id) => {
 
         console.log('GOT PATIENT', patient);
 
-        dispatch(actionCreaters.put(patient));
+        dispatch(actionCreators.put(patient));
     };
 };
 
@@ -19,4 +19,4 @@ export const create = (data) => {
     };
 };
 
-export const clear = () => dispatch => dispatch(actionCreaters.clear());
+export const clear = () => dispatch => dispatch(actionCreators.clear());

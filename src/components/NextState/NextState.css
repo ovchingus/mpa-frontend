@@ -2,7 +2,6 @@
     min-height: 15rem;
     position: relative;
     border-radius: 4px;
-    overflow-y: scroll;
 }
 
 .NextState:not(:last-child){

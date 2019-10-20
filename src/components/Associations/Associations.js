@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import * as associationsThunks from '../../redux/thunks/associations';
 
-export class Associations extends Component {
-    async componentWillReceiveProps ({ patientId }) {
-        if (patientId === this.props.patientId) {
-            return;
-        }
-
-        await this.props.getAssociations(patientId);
-        console.log('GET Associations', this.props.associations);
+export class AssociationsContainer extends React.PureComponent {
+    async componentDidMount () {
+        await this.props.getAssociations(this.props.patientId);
     }
 
     render () {
@@ -30,7 +25,7 @@ export class Associations extends Component {
     }
 }
 
-export default connect(
+export const Associations = connect(
     store => ({
         associations: store.associations,
         patientId: store.patient.id
@@ -38,4 +33,4 @@ export default connect(
     {
         getAssociations: associationsThunks.get
     }
-)(Associations);
+)(AssociationsContainer);

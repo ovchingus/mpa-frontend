@@ -1,30 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './States.css';
 import * as draftThunks from '../../redux/thunks/draft';
 import * as diseasesThunks from '../../redux/thunks/diseases';
-import StatusDraft from '../StatusDraft/StatusDraft';
 import { NextState } from '../NextState/NextState';
-import AssociationForm from '../AssociationForm/AssociationForm';
-import Associations from '../Associations/Associations';
 import * as diseaseThunks from '../../redux/thunks/disease';
 import * as nextStatesThunks from '../../redux/thunks/nextStates';
 import * as medicinesThunks from '../../redux/thunks/medicines';
 import * as patientThunks from '../../redux/thunks/patient';
 import * as graphThunks from '../../redux/thunks/graph';
 import Graph from '../Graph/Graph';
+import { StatusDraft } from '../StatusDraft/StatusDraft';
+import './States.css';
 
-export class States extends React.Component {
+export class StatesContainer extends React.Component {
     componentDidMount () {
         this.props.getDiseases();
     }
 
     async componentWillReceiveProps (nextProps) {
         const { patientId, status } = nextProps;
-
-        if (!patientId || patientId === this.props.patientId) {
-            return;
-        }
 
         if (status && this.props.status && status.state.id === this.props.status.state.id) {
             return;
@@ -33,7 +27,7 @@ export class States extends React.Component {
     }
 
     updatePatientStatusData = async (patientId) => {
-       await this.props.getPatient(patientId);
+        await this.props.getPatient(patientId);
 
         try {
             await this.props.getDraft(patientId);
@@ -45,7 +39,6 @@ export class States extends React.Component {
             };
             await this.props.createDraft(patientId, draftInitData);
         }
-
 
         await this.props.getDisease(patientId);
         await this.props.getNextStates(patientId);
@@ -76,24 +69,8 @@ export class States extends React.Component {
         return (
             <React.Fragment>
                 {status && (<section className="States">
-                    <div className="States-PrevWrap States-Wrap">
-                        <div className="States-Prev">
-                            <AssociationForm getData={this.associationData} />
-                            <h2 className='States-Heading'>Текущее состояние</h2>
-                            <p>name: {status.state.name}</p>
-                            <p>description: {status.state.description}</p>
-                            <p>updated on: {status.submittedOn}</p>
-                            {status.attributes && status.attributes.map(attribute =>
-                                <p key={attribute.id} >{attribute.name} - {attribute.value}</p>)}
-                            {status.medicines.length !== 0 && <h3>Лекарства</h3>}
-                            {status.medicines && status.medicines.map(medicine =>
-                              <p key={medicine.id}>{medicine.name}</p>
-                            )}
-                        </div>
-                    </div>
                     <div className="States-DraftWrap States-Wrap">
                         <StatusDraft updatePatientStatusData={this.updatePatientStatusData}/>
-                        {/*<Associations />*/}
                         <Graph />
                     </div>
                     {nextStates.length ? <div className="States-NextWrap States-Wrap">
@@ -110,7 +87,7 @@ export class States extends React.Component {
     }
 }
 
-export default connect(
+export const States = connect(
     store => ({
         nextStates: store.nextStates,
         draft: store.draft,
@@ -131,4 +108,4 @@ export default connect(
         getMedicines: medicinesThunks.get,
         getGraph: graphThunks.get
     }
-)(States);
+)(StatesContainer);
