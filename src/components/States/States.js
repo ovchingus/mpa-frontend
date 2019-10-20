@@ -20,10 +20,6 @@ export class StatesContainer extends React.Component {
     async componentWillReceiveProps (nextProps) {
         const { patientId, status } = nextProps;
 
-        if (!patientId || patientId === this.props.patientId) {
-            return;
-        }
-
         if (status && this.props.status && status.state.id === this.props.status.state.id) {
             return;
         }

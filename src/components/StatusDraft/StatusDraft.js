@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Divider, Icon, Select } from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
-import './StatusDraft.css';
 import AssociationForm from '../AssociationForm/AssociationForm';
 import * as draftThunks from '../../redux/thunks/draft';
 import * as nextStatesThunks from '../../redux/thunks/nextStates';
 import * as diseaseThunks from '../../redux/thunks/disease';
 import store from '../../redux';
+import './StatusDraft.css';
 
 export class StatusDraftContainer extends React.Component {
     state = {
@@ -23,10 +23,7 @@ export class StatusDraftContainer extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
-        const { patient, draft } = nextProps;
-        if (patient && patient.id && patient.id === this.props.patient.id) {
-            return;
-        }
+        const { draft } = nextProps;
 
         this.setState({
             symptomsAmount: 1,
