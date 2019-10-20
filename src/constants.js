@@ -1,8 +1,6 @@
-import PatientsList from './components/PatientsList/PatientsList';
+import { PatientsList } from './components/PatientsList/PatientsList';
 import { PatientInfo } from './components/PatientInfo/PatientInfo';
 import { Patient } from './components/Patient/Patient';
-import { StatusDraft } from './components/StatusDraft/StatusDraft';
-// import { States } from './components/States/States';
 import { Associations } from './components/Associations/Associations';
 import { CurrentState } from './components/CurrentState/CurrentState';
 import { States } from './components/States/States';

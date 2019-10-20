@@ -4,7 +4,7 @@ import NewPatientForm from '../NewPatientFormModal/NewPatientFormModal';
 import * as patientsThunks from '../../redux/thunks/patients';
 import { NavLink } from 'react-router-dom';
 
-export class PatientsList extends React.Component {
+class PatientsListContainer extends React.Component {
     componentDidMount () {
         this.props.getPatients();
     }
@@ -18,7 +18,7 @@ export class PatientsList extends React.Component {
                 <ul className={'PatientsList-List'}>
                     {patients.map(patient => {
                         return (
-                            <NavLink to={`/patient/${patient.id}/states`} key={patient.id}>
+                            <NavLink to={`/patient/${patient.id}/info`} key={patient.id}>
                                 <li
                                     className={'PatientsList-Item'}
                                     style={{ cursor: 'pointer' }}>
@@ -33,11 +33,11 @@ export class PatientsList extends React.Component {
     }
 }
 
-export default connect(
+export const PatientsList = connect(
     store => ({
         patients: store.patients || []
     }),
     {
         getPatients: patientsThunks.get
     }
-)(PatientsList);
+)(PatientsListContainer);

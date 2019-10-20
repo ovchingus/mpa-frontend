@@ -1,5 +1,5 @@
 import React from 'react';
-import PatientsList from './components/PatientsList/PatientsList';
+import { PatientsList } from './components/PatientsList/PatientsList';
 import { Route, Switch } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { headerRoutes } from './constants';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Divider, Icon, Loader, Select } from 'semantic-ui-react';
+import { Button, Divider, Icon, Select } from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
 import './StatusDraft.css';
 import AssociationForm from '../AssociationForm/AssociationForm';
@@ -18,13 +18,11 @@ export class StatusDraftContainer extends React.Component {
 
     componentDidMount () {
         const { patient } = this.props;
-        console.log('componentDidMount', this.props, store.getState());
 
         this.props.updatePatientStatusData(patient.id);
     }
 
     componentWillReceiveProps (nextProps) {
-        console.log('componentWillReceiveProps', this.props, nextProps, store.getState());
         const { patient, draft } = nextProps;
         if (patient && patient.id && patient.id === this.props.patient.id) {
             return;
