@@ -17,7 +17,11 @@ class CurrentStateContainer extends React.PureComponent {
                     <h4>Анализы</h4>
                     <ul>
                         {status.attributes.length ? status.attributes.map(attr =>
-                            <li key={attr.name}>{JSON.stringify(attr)}</li>)
+                            <li key={attr.name}>
+                                <b>Название:</b> {attr.name}
+                                <br/>
+                                <b>Результат:</b> {attr.value}
+                            </li>)
                             : 'ничего не назначено'}
                     </ul>
                 </div>
@@ -25,7 +29,11 @@ class CurrentStateContainer extends React.PureComponent {
                     <h4>Лекарства</h4>
                     <ul>
                         {status.medicines.length ? status.medicines.map(attr =>
-                            <li key={attr.name}>{JSON.stringify(attr)}</li>)
+                            <li key={attr.name}>
+                                <b>Название:</b> {attr.name}
+                                <br/>
+                                <b>Доза:</b> {attr.value}
+                            </li>)
                             : 'ничего не прописано'}
                     </ul>
                 </div>
