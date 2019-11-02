@@ -18,7 +18,7 @@ class PatientsListContainer extends React.Component {
                 <ul className={'PatientsList-List'}>
                     {patients.map(patient => {
                         return (
-                            <NavLink to={`/patient/${patient.id}/info`} key={patient.id}>
+                            <NavLink to={`/patient/${patient.id}/draft`} key={patient.id}>
                                 <li
                                     className={'PatientsList-Item'}
                                     style={{ cursor: 'pointer' }}>

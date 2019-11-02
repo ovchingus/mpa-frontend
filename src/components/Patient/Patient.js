@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { SideBar } from '../Sidebar/Sidebar';
 import { routes } from '../../constants';
 import { connect } from 'react-redux';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader, Card } from 'semantic-ui-react';
 import * as patientThunks from '../../redux/thunks/patient';
 import './Patient.css';
 
@@ -13,15 +13,23 @@ class PatientContainer extends React.PureComponent {
     }
 
     render () {
-        if (!this.props.patient.id) {
+        const { patient } = this.props;
+        if (!patient.id) {
             return (
                 <Dimmer active inverted>
                     <Loader inverted/>
                 </Dimmer>
             );
         }
+
         return (
             <section className="Patient">
+                <Card className="Patient-General"
+                    header={patient.name}
+                    meta={patient.diseaseName}
+                    description={`Дата рождения: ${patient.birthDate}`}
+                />
+                {console.log(patient)}
                 <SideBar/>
                 <div className={'Patient-Main'}>
                     <Switch>
