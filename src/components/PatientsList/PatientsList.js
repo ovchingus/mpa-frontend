@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NewPatientForm from '../NewPatientFormModal/NewPatientFormModal';
+import NewPatientForm from '../NewPatientForm/NewPatientForm';
 import * as patientsThunks from '../../redux/thunks/patients';
 import { NavLink } from 'react-router-dom';
 

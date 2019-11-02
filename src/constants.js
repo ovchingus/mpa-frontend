@@ -4,12 +4,20 @@ import { Patient } from './components/Patient/Patient';
 import { Associations } from './components/Associations/Associations';
 import { CurrentState } from './components/CurrentState/CurrentState';
 import { States } from './components/States/States';
+import { NewPatientForm } from './components/NewPatientForm/NewPatientForm';
 
 export const headerRoutes = [
     {
         name: 'Пациенты',
         path: '/patients',
-        component: PatientsList
+        component: PatientsList,
+        exact: true
+    },
+    {
+        name: 'Создать пациента',
+        path: '/patients/new',
+        component: NewPatientForm,
+        exact: true
     },
     {
         path: '/patient/:patientId',

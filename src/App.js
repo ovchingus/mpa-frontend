@@ -12,7 +12,7 @@ export const App = () => (
             <Switch>
                 <Route exact path='/' component={PatientsList}/>
                 {headerRoutes.map(route =>
-                    <Route path={route.path} component={route.component} key={route.path}/>)}
+                    <Route path={route.path} component={route.component} key={route.path} exact={route.exact}/>)}
             </Switch>
         </main>
     </div>
