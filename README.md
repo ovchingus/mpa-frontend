@@ -3,36 +3,24 @@ Hype driven development
 
 # Development
 
-### Requirements
-
-1. nvm ([Mac](https://github.com/creationix/nvm), [Win](https://github.com/coreybutler/nvm-windows))
-2. [Yarn](https://yarnpkg.com/en/docs/install)
 
 ### Setup
 
-1. Install Node with needed version
 
 ```bash
-$ nvm install
-```
-
-2. Install npm dependencies
-
-```bash
-$ yarn install --frozen-lockfile
+$ npm install
 ```
 
 ### Testing and linting
 
 ```bash
-$ yarn test
-$ yarn lint
+$ npm test
 ```
 
-If you don't want watch mode during testing, use:
+### Build
 
 ```bash
-$ yarn test:ci
+$ npm run Build
 ```
 
 ### Commit
