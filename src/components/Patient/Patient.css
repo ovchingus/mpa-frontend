@@ -1,3 +1,25 @@
 .Patient{
-    display: flex;
+    display: grid;
+    grid-template-areas: 'info main'
+                        'sidebar main';
+    grid-template-columns: 210px 1fr;
+    grid-template-rows: max-content 1fr;
+    grid-column-gap: 20px;
+
+}
+
+.Patient-General{
+    grid-area: info;
+
+}
+.Sidebar{
+    grid-area: sidebar;
+}
+
+.Patient-Main{
+    grid-area: main;
+
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
 }

@@ -1,15 +1,23 @@
 import { PatientsList } from './components/PatientsList/PatientsList';
-import { PatientInfo } from './components/PatientInfo/PatientInfo';
 import { Patient } from './components/Patient/Patient';
 import { Associations } from './components/Associations/Associations';
 import { CurrentState } from './components/CurrentState/CurrentState';
 import { States } from './components/States/States';
+import { NewPatientForm } from './components/NewPatientForm/NewPatientForm';
+import { PatientHistory } from './components/PatientHistory/PatientHistory';
 
 export const headerRoutes = [
     {
         name: 'Пациенты',
         path: '/patients',
-        component: PatientsList
+        component: PatientsList,
+        exact: true
+    },
+    {
+        name: 'Создать пациента',
+        path: '/patients/new',
+        component: NewPatientForm,
+        exact: true
     },
     {
         path: '/patient/:patientId',
@@ -31,12 +39,7 @@ export const sidebarRoutes = [
     {
         name: 'История',
         path: 'history',
-        component: PatientInfo
-    },
-    {
-        name: 'Информация',
-        path: 'info',
-        component: PatientInfo
+        component: PatientHistory
     },
     {
         name: 'Ассоциации',

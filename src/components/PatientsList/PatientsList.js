@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NewPatientForm from '../NewPatientFormModal/NewPatientFormModal';
+import NewPatientForm from '../NewPatientForm/NewPatientForm';
 import * as patientsThunks from '../../redux/thunks/patients';
 import { NavLink } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ class PatientsListContainer extends React.Component {
                 <ul className={'PatientsList-List'}>
                     {patients.map(patient => {
                         return (
-                            <NavLink to={`/patient/${patient.id}/info`} key={patient.id}>
+                            <NavLink to={`/patient/${patient.id}/draft`} key={patient.id}>
                                 <li
                                     className={'PatientsList-Item'}
                                     style={{ cursor: 'pointer' }}>
