@@ -8,7 +8,7 @@ import * as nextStatesThunks from '../../redux/thunks/nextStates';
 import * as medicinesThunks from '../../redux/thunks/medicines';
 import * as patientThunks from '../../redux/thunks/patient';
 import * as graphThunks from '../../redux/thunks/graph';
-import Graph from '../Graph/Graph';
+import { Graph } from '../Graph/Graph';
 import { StatusDraft } from '../StatusDraft/StatusDraft';
 import './States.css';
 
@@ -46,7 +46,6 @@ export class StatesContainer extends React.Component {
         const diseaseId = this.props.diseases.find(disease => disease.name === this.props.diseaseName).id;
 
         await this.props.getMedicines(diseaseId);
-        await this.props.getGraph(diseaseId);
 
         console.log('DRAFT', this.props.draft);
         console.log('GET diseaseData', this.props.disease);
@@ -71,7 +70,7 @@ export class StatesContainer extends React.Component {
                 {status && (<section className="States">
                     <div className="States-DraftWrap States-Wrap">
                         <StatusDraft updatePatientStatusData={this.updatePatientStatusData}/>
-                        <Graph />
+                        <Graph stateId={status.state.id}/>
                     </div>
                     {nextStates.length ? <div className="States-NextWrap States-Wrap">
                         <div className="States-Next">
