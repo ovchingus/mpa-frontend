@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, Popup } from 'semantic-ui-react';
 import './NewStatusForm.css';
 import AssociationForm from '../AssociationForm/AssociationForm';
 
 export default class NewStatusForm extends React.Component {
     state = {
         healthMatter: '',
-        result: ''
+        result: '',
+        popupIsOpened: false
     };
 
     componentDidMount () {
@@ -52,7 +53,7 @@ export default class NewStatusForm extends React.Component {
 
     onHMChange = async (e, { value }) => {
         await this.setState({ healthMatter: value });
-
+        this.state.healthMatter === 5 && this.setOpen();
         this.handleSubmit();
     };
 
@@ -147,6 +148,11 @@ export default class NewStatusForm extends React.Component {
         }
     }
 
+    setOpen = () => {
+        this.setState({ popupIsOpened: true });
+        setTimeout(() => this.setState({ popupIsOpened: false }), 2000);
+    }
+
     render () {
         const { className, diseaseData } = this.props;
         let { healthMatter, result } = this.state;
@@ -165,12 +171,11 @@ export default class NewStatusForm extends React.Component {
                         <Form.Group widths='1'>
                             <Form.Field className='NewStatus-Field'>
                                 <Form.Select
-                                    label='Analysis or symptom'
+                                    label='Анализы/симптомы'
                                     options={options}
                                     placeholder='data'
                                     value={healthMatter}
                                     onChange={this.onHMChange}
-                                    // disabled={disabled}
                                 />
                             </Form.Field>
                             <Form.Field className='NewStatus-Field'>
@@ -181,6 +186,13 @@ export default class NewStatusForm extends React.Component {
                             }
                         </Form.Group>
                     </Form>}
+                {
+                    <Popup
+                        content='Исходя из представленных данных назначение ЭКГ-тестирования является более эффективным и дешевым'
+                        onOpen={() => this.setOpen()}
+                        open={this.state.popupIsOpened}
+                    />
+                }
             </section>
         );
     }
