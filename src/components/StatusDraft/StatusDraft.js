@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Button, Dimmer, Divider, Loader, Modal, Select} from 'semantic-ui-react';
+import { Dimmer, Divider, Loader, Select } from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
 import AssociationForm from '../AssociationForm/AssociationForm';
 import * as patientThunks from '../../redux/thunks/patient';
@@ -14,8 +14,7 @@ export class StatusDraftContainer extends React.Component {
     state = {
         symptomsAmount: 1,
         medicinesAmount: 1,
-        disableSubmit: false,
-        medicineModalOpen: false,
+        disableSubmit: false
     };
 
     componentDidMount () {
@@ -110,16 +109,13 @@ export class StatusDraftContainer extends React.Component {
         }
 
         if (medicineId) {
-            this.setState({
-                medicineModalOpen: true,
-                loading: false
-            });
-            return;
-            // draft.medicines = [
-            //     ...draft.medicines,
-            //     medicineId
-            // ];
+            draft.medicines = [
+                ...draft.medicines,
+                medicineId
+            ];
         }
+
+        console.log('DRAFT UPDATED', draft);
 
         const data = {
             attributes: (draft && draft.attributes) || [],
@@ -206,27 +202,11 @@ export class StatusDraftContainer extends React.Component {
                                             key: medicine.id,
                                             text: medicine.name
                                         }))}
-                                        onChange={(e, option) => {
-                                            this.onDraftUpdate(undefined, option.value);
-                                            console.log(e);
-                                            e.preventDefault();
-                                        }}
+                                        onChange={(e, option) => this.onDraftUpdate(undefined, option.value)}
                                     />
                                 </div>
                             )
                         }
-                        <Modal
-                            open={this.state.medicineModalOpen}
-                        >
-                            <Modal.Content>
-                                Препарат Лозартан несовместим с уже назначенным препаратом Эналаприл
-                            </Modal.Content>
-                            <Modal.Actions>
-                                <Button onClick={() => this.setState({medicineModalOpen: false})}>
-                                    OK
-                                </Button>
-                            </Modal.Actions>
-                        </Modal>
                     </div>
                     }
                     <Divider/>
