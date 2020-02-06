@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {Button, Dimmer, Divider, Loader, Modal, Select} from 'semantic-ui-react';
 import NewStatusForm from '../NewStatusForm/NewStatusForm';
 import AssociationForm from '../AssociationForm/AssociationForm';
-import ProcedureDataUploader from '../ProcedureDataUploader/ProcedureDataUploader';
 import * as patientThunks from '../../redux/thunks/patient';
 import * as draftThunks from '../../redux/thunks/draft';
 import * as nextStatesThunks from '../../redux/thunks/nextStates';
@@ -253,7 +252,6 @@ export class StatusDraftContainer extends React.Component {
                             />
                         }
                     </div>
-                    <ProcedureDataUploader/>
                 </Dimmer.Dimmable>
             </div>
         );
